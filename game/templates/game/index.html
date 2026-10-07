@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>♟️ Python Chess Arena</title>
+    <link rel="stylesheet" href="{% static 'game/style.css' %}">
+</head>
+<body>
+<div class="app-shell">
+    <header class="topbar">
+        <div>
+            <p class="eyebrow">PYTHON • DJANGO • JAVASCRIPT</p>
+            <h1>♟️ Chess Arena</h1>
+            <p class="subtitle">A full-rule browser chess game powered by a Python backend.</p>
+        </div>
+        <div class="header-badge">LOCAL 2-PLAYER</div>
+    </header>
+
+    <main class="game-layout">
+        <section class="board-card">
+            <div class="player-row">
+                <div class="player-info">
+                    <span class="player-dot black"></span>
+                    <div><strong>Black</strong><small>Player 2</small></div>
+                </div>
+                <div id="blackCaptured" class="captured"></div>
+            </div>
+
+            <div class="board-wrap">
+                <div id="chessboard" class="chessboard" aria-label="Chess board"></div>
+            </div>
+
+            <div class="player-row">
+                <div class="player-info">
+                    <span class="player-dot white"></span>
+                    <div><strong>White</strong><small>Player 1</small></div>
+                </div>
+                <div id="whiteCaptured" class="captured"></div>
+            </div>
+        </section>
+
+        <aside class="side-panel">
+            <div class="status-card">
+                <span class="status-label">GAME STATUS</span>
+                <h2 id="status">White to move.</h2>
+                <div class="turn-pill" id="turnPill">WHITE'S TURN</div>
+            </div>
+
+            <div class="controls">
+                <button id="newGame" class="primary">＋ New Game</button>
+                <button id="undo" class="secondary">↶ Undo</button>
+                <button id="flip" class="secondary">⇄ Flip Board</button>
+            </div>
+
+            <div class="moves-card">
+                <div class="card-heading">
+                    <h3>Move History</h3>
+                    <span id="moveCount">0 moves</span>
+                </div>
+                <div id="moves" class="moves-list">
+                    <p class="empty">Your moves will appear here.</p>
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>How to play</strong>
+                <p>Click a piece, then click a highlighted square. Promotion defaults to a queen.</p>
+            </div>
+        </aside>
+    </main>
+
+    <footer>Built with Django + python-chess + vanilla JavaScript</footer>
+</div>
+
+<script>
+    window.CHESS_CSRF = "{{ csrf_token }}";
+</script>
+<script src="{% static 'game/app.js' %}"></script>
+</body>
+</html>
